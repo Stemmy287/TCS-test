@@ -24,18 +24,18 @@ export const imgData = {
 const selectors = document.querySelectorAll('.selector__item')
 const imageBlock = document.querySelector('.image-picker-block')
 
-imageBlock.innerHTML = imgData.gallery.map(el => `<img class="image-picker-block__image" src=${el.img}>`).join('')
+imageBlock.innerHTML = imgData.gallery.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
 
 selectors.forEach(selector => {
   selector.addEventListener('click', () => {
     selectors.forEach(el => el.classList.remove('selector__item-active'))
     selector.classList.add('selector__item-active')
     if (selector.id === 'gallery') {
-      imageBlock.innerHTML = imgData.gallery.map(el => `<img class="image-picker-block__image" src=${el.img}>`).join('')
+      imageBlock.innerHTML = imgData.gallery.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
     } else if (selector.id === 'sample') {
-      imageBlock.innerHTML = imgData.sample.map(el => `<img class="image-picker-block__image" src=${el.img}>`).join('')
+      imageBlock.innerHTML = imgData.sample.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
     } else {
-      imageBlock.innerHTML = imgData.background.map(el => `<img class="image-picker-block__image" src=${el.img}>`).join('')
+      imageBlock.innerHTML = imgData.background.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
     }
   })
 })
