@@ -66,6 +66,8 @@
     height: 35px;
     border-radius: 50%;
     cursor: pointer;
+    font-size: 20px;
+
 }
 
 .swiper__number-of-page {
@@ -88,10 +90,39 @@
 
 .selector__item {
     color: #192651;
+    opacity: .5;
     font-size: 14px;
     cursor: pointer;
 }
 
+.selector__item-active {
+    color: #192651;
+    opacity: 1;
+    cursor: pointer;
+    position: relative;
+}
+
+.selector__item-active:before {
+    content: '';
+    position: absolute;
+    height: 2px;
+    background-color: #192651;
+    width: 150%;
+    bottom: -10px;
+    left: -26%;
+}
+
 .image-picker-block {
+    display: flex;
+    flex-wrap: wrap;
     height: 300px;
+    padding: 15px;
+    justify-content: space-between;
+}
+
+.image-picker-block__image {
+    width: 150px;
+    height: 120px;
+    border-radius: 10px;
+    cursor: pointer;
 }
