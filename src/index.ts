@@ -29,16 +29,16 @@ export const imgData = {
 
 //selectorsElements
 const selectors = document.querySelectorAll('.selector__item')
-const imageBlock = document.querySelector('.image-picker-block')
+const imageBlock = document.querySelector('.images-block')
 const basketButton = document.querySelector('.button')
 const contentBlock = document.querySelector('.content')
-const numberOfPage = document.querySelector('.swiper__number-of-page')
+const numberOfPage = document.querySelector('.slider-nav__number-of-page')
 const sliderLine = document.getElementById('slider-line')
 const buttonNext = document.getElementById('next')
 const buttonPrev = document.getElementById('prev')
 
 sliderLine.innerHTML = imgData.slider.map(el => `<img class="slider__image" alt="" src=${el.img}>`).join('')
-imageBlock.innerHTML = imgData.gallery.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
+imageBlock.innerHTML = imgData.gallery.map(el => `<img class="images-block__image" alt="" src=${el.img}>`).join('')
 
 let offset = 0
 let number = 1
@@ -72,7 +72,7 @@ buttonPrev.addEventListener('click', () => {
 
 const pickerImg = () => {
 
-  let images = document.querySelectorAll('.image-picker-block__image')
+  let images = document.querySelectorAll('.images-block__image')
 
   images.forEach(image => {
     image.addEventListener('click', () => {
@@ -101,12 +101,12 @@ selectors.forEach(selector => {
     selectors.forEach(el => el.classList.remove('selector__item_active'))
     selector.classList.add('selector__item_active')
     if (selector.id === 'gallery') {
-      imageBlock.innerHTML = imgData.gallery.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
+      imageBlock.innerHTML = imgData.gallery.map(el => `<img class="images-block__image" alt="" src=${el.img}>`).join('')
       pickerImg()
     } else if (selector.id === 'sample') {
-      imageBlock.innerHTML = imgData.sample.map(el => `<img class="image-picker-block__image image-picker-block__image_noPointer" alt="" src=${el.img}>`).join('')
+      imageBlock.innerHTML = imgData.sample.map(el => `<img class="images-block__image images-block__image_noPointer" alt="" src=${el.img}>`).join('')
     } else {
-      imageBlock.innerHTML = imgData.background.map(el => `<img class="image-picker-block__image image-picker-block__image_noPointer" alt="" src=${el.img}>`).join('')
+      imageBlock.innerHTML = imgData.background.map(el => `<img class="images-block__image images-block__image_noPointer" alt="" src=${el.img}>`).join('')
     }
   })
 })
