@@ -12,6 +12,7 @@
 .content {
     border: 1px rgb(0, 0, 0, 0.1) solid;
     width: 350px;
+    position: relative;
 }
 
 .header {
@@ -23,13 +24,13 @@
     height: 50px;
 }
 
-.header__title {
+.title {
     font-size: 17px;
     font-weight: 500;
     color: #192651;
 }
 
-.header__button {
+.button {
     border: none;
     border-radius: 4px;
     height: 30px;
@@ -124,5 +125,42 @@
     width: 150px;
     height: 120px;
     border-radius: 10px;
+    cursor: pointer;
+}
+
+.popUp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    background-color: rgb(0,0,0, .1);
+
+    position: absolute;
+    top: 0;
+}
+
+.notification {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 250px;
+    height: 150px;
+    background-color: #fff;
+    row-gap: 20px;
+    border: 1px solid rgb(0,0,0, .3);
+    position: relative;
+}
+
+.notification__text {
+    font-size: 15px;
+    text-align: center;
+}
+
+.close {
+    position: absolute;
+    top: 7px;
+    right: 10px;
     cursor: pointer;
 }

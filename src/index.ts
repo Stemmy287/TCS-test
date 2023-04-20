@@ -23,8 +23,26 @@ export const imgData = {
 
 const selectors = document.querySelectorAll('.selector__item')
 const imageBlock = document.querySelector('.image-picker-block')
+const mainImage = document.querySelector('.image')
+const basketButton = document.querySelector('.button')
+const contentBlock = document.querySelector('.content')
 
 imageBlock.innerHTML = imgData.gallery.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
+mainImage.setAttribute('src', imgData.gallery[0].img)
+
+const pickerImg = () => {
+
+  let images = document.querySelectorAll('.image-picker-block__image')
+
+  images.forEach(image => {
+    image.addEventListener('click', () => {
+      mainImage.setAttribute('src', image.getAttribute('src'))
+    })
+  })
+
+}
+
+pickerImg()
 
 selectors.forEach(selector => {
   selector.addEventListener('click', () => {
@@ -32,6 +50,7 @@ selectors.forEach(selector => {
     selector.classList.add('selector__item-active')
     if (selector.id === 'gallery') {
       imageBlock.innerHTML = imgData.gallery.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
+      pickerImg()
     } else if (selector.id === 'sample') {
       imageBlock.innerHTML = imgData.sample.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
     } else {
@@ -40,3 +59,33 @@ selectors.forEach(selector => {
   })
 })
 
+basketButton.addEventListener('click', () => {
+
+  const popUp = document.createElement('div')
+
+  popUp.className = 'popUp'
+
+  popUp.innerHTML = `<div class="notification">
+    <span class="notification__text">Продукт успешно добвален в корзину</span>
+    <button class="button">Перейти в корзину</button>
+</div>`
+
+  contentBlock.appendChild(popUp)
+
+  popUp.querySelector('.notification').addEventListener('click', (e) => e.stopPropagation())
+
+  popUp.addEventListener('click', () => {
+    popUp.remove()
+  })
+
+  const notification = popUp.querySelector('.notification')
+
+  const closeEl = document.createElement('div')
+  closeEl.className = 'close'
+  closeEl.innerHTML = 'x'
+  notification.appendChild(closeEl)
+
+  closeEl.addEventListener('click', () => {
+    popUp.remove()
+  })
+})
