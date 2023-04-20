@@ -1,34 +1,65 @@
 import "./index.css"
 
 export const imgData = {
+  slider: [
+    {img: 'img/5-dvuhetajnii-krasivii-dom.jpg'},
+    {img: 'img/adigeya_118.jpg'},
+    {img: 'img/images.jpg'},
+    {img: 'img/landscape-of-morning-fog-and-mountains-with-hot-air-balloons-at-sunrise_335224-794.avif'}
+  ],
   gallery: [
-    {id: 1, img: 'https://clck.ru/34BVKh'},
-    {id: 2, img: 'https://clck.ru/34BVMu'},
-    {id: 3, img: 'https://clck.ru/34BVSQ'},
-    {id: 4, img: 'https://clck.ru/34BVWB'}
+    {img: 'img/phonepicutres-TA.webp'},
+    {img: 'img/jason-blackeye-364785-2.jpg'},
+    {img: 'img/best-fall-pictures-russia-1657041577.png'},
+    {img: 'img/hiker-mountains-picture-moon.jpg'}
   ],
   sample: [
-    {id: 1, img: 'https://clck.ru/34BViX'},
-    {id: 2, img: 'https://clck.ru/34BVk3'},
-    {id: 3, img: 'https://clck.ru/34BVqB'},
-    {id: 4, img: 'https://clck.ru/34BVto'}
+    {img: 'img/image_optimzation.jpg'},
+    {img: 'img/istockphoto-117211856-612x612.jpg'},
+    {img: 'img/photo-1529665253569-6d01c0eaf7b6.jpg'},
+    {img: 'img/28649660_web1_220331-WLT-PUSH-JesajaClass_1.jpg'}
   ],
   background: [
-    {id: 1, img: 'https://clck.ru/34BVuX'},
-    {id: 2, img: 'https://clck.ru/33kz2E'},
-    {id: 3, img: 'https://clck.ru/34BVwN'},
-    {id: 4, img: 'https://clck.ru/34BW2b'}
+    {img: 'img/kirpich-kirpichnaia-stena-fon-fotofon-tekstura.jpg'},
+    {img: 'img/1613710553_61-p-minimalistichnii-fon-dlya-prezentatsii-83.jpg'},
+    {img: 'img/vivid-blurred-colorful-background_58702-2655.avif'},
+    {img: 'img/white-brick-wall-textures-background_1203-3691.avif'}
   ]
 }
 
+//selectorsElements
 const selectors = document.querySelectorAll('.selector__item')
 const imageBlock = document.querySelector('.image-picker-block')
-const mainImage = document.querySelector('.image')
 const basketButton = document.querySelector('.button')
 const contentBlock = document.querySelector('.content')
+const sliderLine = document.getElementById('slider-line')
+const buttonNext = document.getElementById('next')
+const buttonPrev = document.getElementById('prev')
 
+sliderLine.innerHTML = imgData.slider.map(el => `<img class="slider__image" alt="" src=${el.img}>`).join('')
 imageBlock.innerHTML = imgData.gallery.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
-mainImage.setAttribute('src', imgData.gallery[0].img)
+
+let offset = 0
+
+buttonNext.addEventListener('click', () => {
+  offset += 318
+
+  if (offset > 318 * (imgData.slider.length - 1)) {
+    offset = 0
+  }
+  sliderLine.style.left = -offset + 'px'
+
+})
+
+buttonPrev.addEventListener('click', () => {
+  offset -= 318
+
+  if (offset < 0) {
+    offset = 318 * (imgData.slider.length - 1)
+  }
+  sliderLine.style.left = -offset + 'px'
+
+})
 
 const pickerImg = () => {
 
@@ -36,7 +67,12 @@ const pickerImg = () => {
 
   images.forEach(image => {
     image.addEventListener('click', () => {
-      mainImage.setAttribute('src', image.getAttribute('src'))
+      const pathImg = image.getAttribute('src')
+      const index = imgData.slider.findIndex(el => el.img === pathImg)
+      if (index === -1) {
+        imgData.slider.unshift({img: pathImg})
+        sliderLine.innerHTML = imgData.slider.map(el => `<img class="slider__image" alt="" src=${el.img}>`).join('')
+      }
     })
   })
 
@@ -44,6 +80,8 @@ const pickerImg = () => {
 
 pickerImg()
 
+
+//selectorBlock
 selectors.forEach(selector => {
   selector.addEventListener('click', () => {
     selectors.forEach(el => el.classList.remove('selector__item-active'))
@@ -59,6 +97,8 @@ selectors.forEach(selector => {
   })
 })
 
+
+//popUp
 basketButton.addEventListener('click', () => {
 
   const popUp = document.createElement('div')

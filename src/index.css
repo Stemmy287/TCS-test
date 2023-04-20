@@ -49,8 +49,23 @@
     row-gap: 17px;
 }
 
-.image {
-    width: 100%;
+.slider {
+    width: 318px;
+    height: 230px;
+    overflow: hidden;
+}
+
+.slider__slider-line {
+    height: 230px;
+    width: 1272px;
+    display: flex;
+    position: relative;
+    left: 0;
+    transition: all ease .5s;
+}
+
+.slider__image {
+    width: 318px;
     height: 230px;
 }
 
