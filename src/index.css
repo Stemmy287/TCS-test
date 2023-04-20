@@ -111,14 +111,14 @@
     cursor: pointer;
 }
 
-.selector__item-active {
+.selector__item_active {
     color: #192651;
     opacity: 1;
     cursor: pointer;
     position: relative;
 }
 
-.selector__item-active:before {
+.selector__item_active:before {
     content: '';
     position: absolute;
     height: 2px;
@@ -143,6 +143,10 @@
     cursor: pointer;
 }
 
+.image-picker-block__image_noPointer {
+    cursor: auto;
+}
+
 .popUp {
     display: flex;
     justify-content: center;
@@ -162,6 +166,7 @@
     justify-content: center;
     width: 250px;
     height: 150px;
+    padding: 30px;
     background-color: #fff;
     row-gap: 20px;
     border: 1px solid rgb(0,0,0, .3);

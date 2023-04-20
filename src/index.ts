@@ -32,6 +32,7 @@ const selectors = document.querySelectorAll('.selector__item')
 const imageBlock = document.querySelector('.image-picker-block')
 const basketButton = document.querySelector('.button')
 const contentBlock = document.querySelector('.content')
+const numberOfPage = document.querySelector('.swiper__number-of-page')
 const sliderLine = document.getElementById('slider-line')
 const buttonNext = document.getElementById('next')
 const buttonPrev = document.getElementById('prev')
@@ -40,24 +41,32 @@ sliderLine.innerHTML = imgData.slider.map(el => `<img class="slider__image" alt=
 imageBlock.innerHTML = imgData.gallery.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
 
 let offset = 0
+let number = 1
 
 buttonNext.addEventListener('click', () => {
+
   offset += 318
+  number += 1
 
   if (offset > 318 * (imgData.slider.length - 1)) {
     offset = 0
+    number = 1
   }
   sliderLine.style.left = -offset + 'px'
-
+  numberOfPage.innerHTML = `Страница ${number}`
 })
 
 buttonPrev.addEventListener('click', () => {
+
   offset -= 318
+  number -= 1
 
   if (offset < 0) {
     offset = 318 * (imgData.slider.length - 1)
+    number = imgData.slider.length
   }
   sliderLine.style.left = -offset + 'px'
+  numberOfPage.innerHTML = `Страница ${number}`
 
 })
 
@@ -72,6 +81,12 @@ const pickerImg = () => {
       if (index === -1) {
         imgData.slider.unshift({img: pathImg})
         sliderLine.innerHTML = imgData.slider.map(el => `<img class="slider__image" alt="" src=${el.img}>`).join('')
+        offset = 0
+        sliderLine.style.left = offset + 'px'
+        number = 1
+        numberOfPage.innerHTML = `Страница ${number}`
+      } else {
+        popUpCreate(`<span class="notification__text">Фото уже было добалено на главное окно</span>`)
       }
     })
   })
@@ -80,35 +95,30 @@ const pickerImg = () => {
 
 pickerImg()
 
-
 //selectorBlock
 selectors.forEach(selector => {
   selector.addEventListener('click', () => {
-    selectors.forEach(el => el.classList.remove('selector__item-active'))
-    selector.classList.add('selector__item-active')
+    selectors.forEach(el => el.classList.remove('selector__item_active'))
+    selector.classList.add('selector__item_active')
     if (selector.id === 'gallery') {
       imageBlock.innerHTML = imgData.gallery.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
       pickerImg()
     } else if (selector.id === 'sample') {
-      imageBlock.innerHTML = imgData.sample.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
+      imageBlock.innerHTML = imgData.sample.map(el => `<img class="image-picker-block__image image-picker-block__image_noPointer" alt="" src=${el.img}>`).join('')
     } else {
-      imageBlock.innerHTML = imgData.background.map(el => `<img class="image-picker-block__image" alt="" src=${el.img}>`).join('')
+      imageBlock.innerHTML = imgData.background.map(el => `<img class="image-picker-block__image image-picker-block__image_noPointer" alt="" src=${el.img}>`).join('')
     }
   })
 })
-
-
-//popUp
-basketButton.addEventListener('click', () => {
+const popUpCreate = (content: string) => {
 
   const popUp = document.createElement('div')
 
   popUp.className = 'popUp'
 
   popUp.innerHTML = `<div class="notification">
-    <span class="notification__text">Продукт успешно добвален в корзину</span>
-    <button class="button">Перейти в корзину</button>
-</div>`
+        ${content}
+    </div>`
 
   contentBlock.appendChild(popUp)
 
@@ -128,4 +138,9 @@ basketButton.addEventListener('click', () => {
   closeEl.addEventListener('click', () => {
     popUp.remove()
   })
-})
+}
+//popUp
+basketButton.addEventListener('click', () => popUpCreate(
+  `<span class="notification__text">Продукт успешно добвален в корзину</span>
+        <button class="button">Перейти в корзину</button>`
+))
