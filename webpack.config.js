@@ -7,7 +7,7 @@ const CopyPlugin = require("copy-webpack-plugin");
 
 module.exports = {
   devtool: 'source-map',
-  entry: './src/index.ts',
+  entry: './src/main.ts',
   module: {
     rules: [
       {
@@ -31,7 +31,7 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       title: 'our project',
-      template: 'src/custom.html' }),
+      template: 'src/index.html' }),
     new MiniCssExtractPlugin({
       filename:"bundle.css"})
     ,
